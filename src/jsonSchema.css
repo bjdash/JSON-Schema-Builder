@@ -9,9 +9,46 @@ input[type="checkbox"].small:checked:before{
     width: 6px;
     height: 8px;
 }
-.dropdown-menu.model-type-selector{
+.json-schema pre{
+    line-height: 15px;
+    margin: 5px 5px 5px 20px;
+    
+}
+.json-schema .copy{
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 7px;
+    right: 12px;
+    z-index: 20;
+}
+.json-schema .ace_editor{
+    height: 250px;
+}
+.model-type-selector{
     width: 400px;
     padding: 10px;
+    position: fixed;
+    text-align: left;
+    background-color: #ffffff;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    z-index: 4;
+}
+.faint{
+    color:#9E9E9E;font-size:12px;
+}
+.json-schema .nav > li > a{
+    padding: 5px 15px;
+}
+.json-schema .main{
+    background: #fff;padding: 5px 10px;border: 1px dashed #eee;margin: 5px 0;
+}
+.json-schema .nav.nav-tabs{
+    height: 33px;
+}
+.json-schema .tab-content > .tab-pane{
+    position: relative;
 }
 .model-type-selector-cont{
     
@@ -48,11 +85,14 @@ input.model-key{
     font-family: apic-font;
     /*font-weight: bold;*/
     height: 20px;
-    width: 85px;
+    width: 110px;
     box-shadow: none;
     border: 1px solid rgba(0,0,0,0.05);
     padding: 0 5px;
     margin-right: 5px;
+}
+.t_bg input.model-key{
+    color: #666;
 }
 input.model-key:focus, input.model-key:active{
     box-shadow: 0 0 8px rgba(0,0,0,0.1) inset;
@@ -60,6 +100,9 @@ input.model-key:focus, input.model-key:active{
 }
 input.model-key:hover{
     border: 1px solid rgba(0,0,0,0.2);
+}
+input.model-key[readonly]{
+    background: #eee;
 }
 .js-row.t_bg .btn.model-selector{
     background: #fff;
@@ -70,6 +113,13 @@ input.model-key:hover{
 .btn.model-selector:hover .caret{
     display: inline-block;
 }
+.objCont{
+    margin-left:20px;
+    position:relative;
+}
+.objProps{
+    border-left:0px solid rgba(0,0,0,0.2)
+}
 .js-row{
     padding: 2px 15px 1px;
     position: relative;
@@ -78,7 +128,8 @@ input.model-key:hover{
     background: #ECEFF1;
 }
 .js-row:hover .obj-add{
-    background: #ECEFF1;
+    /*background: #ECEFF1;*/
+    background: #FFF;
 }
 .obj-add{
     position: absolute;
@@ -88,13 +139,13 @@ input.model-key:hover{
 }
 .obj-exp{
     position: absolute;
-    left: 0px;
+    left: 2px;
     top: 8px;
     font-size: 12px;
     cursor: pointer
 }
 .js-row .model-remove{
-    color: #ff0000;
+    color: #BDBDBD;
     cursor: pointer;
     position: absolute;
     right: 3px;
@@ -103,18 +154,19 @@ input.model-key:hover{
     height: 18px;
     text-align: center;
     line-height: 13px;
-    font-family: apic-font;
     border-radius: 50%;
     font-size: 12px;
-    display: none;
+    display: block;
     background: #fff;
-    padding-top: 2px;
+    border: none;
+    padding: 0;
 }
 .js-row:hover .model-remove{
-    display: block;
+    color: #ff0000;
+    /*display: block;*/
 }
 .js-row .model-detail{
-    color: #2093EF;
+    color: #BDBDBD;
     cursor: pointer;
     position: absolute;
     right: 25px;
@@ -124,8 +176,11 @@ input.model-key:hover{
     text-align: center;
     line-height: 23px;
     font-size: 15px;
-    background: #fff;
+    /*background: #fff;*/
     /*opacity: 0.3;*/
+}
+.js-row:hover .model-detail{
+    color: #2093EF;
 }
 .js-row .model-done{
     color: #2093EF;
@@ -163,48 +218,49 @@ input.model-key:hover{
 }
 .Array{
     color: #009688 !important;
-    font-weight: bold;
 }
 .Boolean{
     color: #FF9800 !important;
-    font-weight: bold;
 }
 .Integer, .Number{
     color: #E91E63 !important;
-    font-weight: bold;
 }
 .Null{
     color: #F44336 !important;
-    font-weight: bold;
 }
 .String{
     color: #9C27B0 !important;
-    font-weight: bold;
 }
 .Object{
     color: #2196f3 !important;
-    font-weight: bold;
 }
 .unspecified{
     color: #9E9E9E;
-    font-weight: bold;
+}
+.btn-link.btn-href.model-selector{
+    font-family: apic-font;
+    line-height: 19px;
+    display: inline-block;
+    margin-top: -3px;
 }
 .model-det-cont{
     background:#f5f5f5;
     overflow:auto;
-    padding:10px;
+    padding:5px;
     box-shadow: 2px 2px 3px rgba(0,0,0,0.2);
     margin-bottom: 5px;
 }
 form.model-detail-form .control-label{
     padding: 0 5px;
+    font-size: 12px;
+    margin-bottom: 0;
 }
 form.model-detail-form .detail-ip{
-    font-size: 13px;
+    font-size: 12px;
     font-family: apic-font;
     background-color: #fff;
-    padding: 0 5px;
-    height: 25px;
+    padding: 0 0 0 5px;
+    height: 22px;
 }
 form.model-detail-form select.detail-ip{
     padding-right: 20px;
@@ -214,6 +270,10 @@ form.model-detail-form textarea{
     font-family: apic-font;
     background: #fff;
     padding: 0 5px;
+}
+form.model-detail-form textarea.detail-ip{
+    min-height: 80px;
+    width: 100%;
 }
 label.model-label-x{
     width: 90px;

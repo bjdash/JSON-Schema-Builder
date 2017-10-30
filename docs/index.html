@@ -39,8 +39,96 @@
             </div>
         </nav>
         <div class="container">
-            <div json-schema data="data"></div>
+            <div json-schema data="data" models="refModels"></div>
+
+            <h3>Usage Guide</h3>
+            <h4>Directive</h4>
+            <p>
+                To use <span class="code">JSON-Schema-Builder</span> in your application inject <span class="code">json-schema</span> into your module.
+                <pre class="highlight">angular.module('myapp', ['json-schema'])</pre>
+                
+                Next use <span class="code">json-schema</span> directive in you html.
+                <pre class="highlight">&lt;div json-schema data="data" models="refModels"&gt;&lt;/div&gt;</pre>
+                
+                This module supports $ref and to specify the $ref models you can use the <span class="code">models</span> attribute in the directive as shown above.
+                Define an aboject that contains the list of models that you want to display as option for $ref as
+                <pre>
+$scope.refModels = {
+    "1496757761729": {
+        "name": "User",
+        "nameSpace": "user",
+        "data": {
+            "type": ["object"],
+            "properties": {
+                "name": {
+                    "type": ["string"]
+                }
+            }
+        }
+    },
+    "1497245758395": {
+        "name": "Address",
+        "nameSpace": "address",
+        "data": {
+            "type": ["object"]
+        }
+    }
+};
+                </pre>
+                Now when you select $ref as the type you will get a dropdown with <span class="code">#/definitions/user</span> and <span class="code">#/definitions/address</span>
+            </p>
+            <h4>Service</h4>
+            This library also exposes a service <span class="code">JsonSchema</span> which you can inject into your controller and use.
+            <pre>
+angular.module('app', ['json-schema'])
+    .controller('MyController', MyController);
+
+MyController.$inject = ['$scope', 'JsonSchema'];
+function schemaCtrler($scope, JsonSchema) {
+    ......
+}
+            </pre>
+            Some of the functions available in the service are
+            <ul>
+                <li><span class="bold">obj2schema</span>: Converts the object/model referred by <span class="code">data</span> attribute in the directive to Json Schema</li>
+                <pre>
+>>> html
+&lt;div json-schema data="xyz" models="refModels"&gt;&lt;/div&gt;
+
+>>> js
+//to get the actual schema schema from xyz use 
+var schema = JsonSchema.obj2schema($scope.xyz);
+                </pre>
+                <li><span class="bold">schema2obj</span>: Converts any Json Schema to an object so that it can be passed to the <span class="code">data</span> attribute in the directive. Can be used to initilize the editor to some default schema.</li>
+                <pre>
+>>> js
+var schema = {
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 255
+        },
+        "age": {
+            "type": "integer",
+            "minimum": 18
+        }
+    },
+    "required": [
+        "name",
+        "age"
+    ]
+}
+
+$scope.schemaData = JsonSchema.schema2obj(schema)
+
+>>> html
+&lt;div json-schema data="schemaData" models="refModels"&gt;&lt;/div&gt;
+                </pre>
+            </ul>
         </div>
+        
     </body>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

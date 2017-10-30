@@ -1,6 +1,7 @@
 /****** light blue theme *********/
 body{
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    min-height:calc(100vh);
 }
 
 /*bootstrap over rides*/
@@ -28,6 +29,16 @@ a.btn.round-btn:hover{
 pre{
     margin: 15px;
     line-height: 15px;
+}
+.code{
+    border:1px solid #ccc;
+    background:#eee;
+    border-radius:3px;
+    padding:3px;
+}
+.bold{
+    font-weight:bold;
+    font-size:14px;
 }
 
 /*********generic **********/
