@@ -33,7 +33,7 @@
         
         var mainSchema = '<div class="objCont">\
         <fieldset ng-disabled="entity.disabled">\
-    <div class="js-row" ng-class="showDetailsPan?\'t_bg\':\'\'" ng-init="showDetailsPan=false;ctrl.expanded=true">\
+    <div class="js-row" ng-class="showDetailsPan?\'t_bg\':\'\'" ng-init="showDetailsPan=false;ctrl={expanded:true}">\
         <button type="button" class="btn btn-link btn-href glyphicon glyphicon-plus obj-add" ng-click="addNewProp(entity,$data,$event,entity._type.indexOf(\'Object\')<0 && entity._items[0]._type[0]==\'Object\' ? true: false)" ng-disabled="$mode == \'static\'" ng-if="(entity._type.indexOf(\'Object\')>=0) || (entity._items[0]._type[0]==\'Object\')"></button>\
         <span ng-hide="($mode == \'list\' || $mode == \'static\')&& entity.root$$">\
             <span class="glyphicon t_color obj-exp" ng-class="ctrl.expanded?\'glyphicon-triangle-bottom\':\'glyphicon-triangle-right\'" ng-click="ctrl.expanded=!ctrl.expanded"  ng-if="entity._type.indexOf(\'Object\')>=0"></span>\
