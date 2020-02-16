@@ -39,7 +39,7 @@
             </div>
         </nav>
         <div class="container">
-            <div json-schema data="data" models="refModels"></div>
+            <div json-schema data="data" definitions="definitions"></div>
 
             
             <h3>Usage Guide</h3>
@@ -50,34 +50,38 @@
                 <pre class="highlight">angular.module('myapp', ['json-schema'])</pre>
                 
                 Next use <span class="code">json-schema</span> directive in you html.
-                <pre class="highlight">&lt;div json-schema data="data" models="refModels"&gt;&lt;/div&gt;</pre>
+                <pre class="highlight">&lt;div json-schema data="data" definitions="definitions"&gt;&lt;/div&gt;</pre>
                 
-                This module supports $ref and to specify the $ref models you can use the <span class="code">models</span> attribute in the directive as shown above.
+                This module supports $ref and to specify the $ref models you can use the <span class="code">definitions</span> attribute in the directive as shown above.
                 Define an aboject that contains the list of models that you want to display as option for $ref as
                 <pre>
-$scope.refModels = {
-    "1496757761729": {
-        "name": "User",
-        "nameSpace": "user",
-        "data": {
-            "type": ["object"],
-            "properties": {
-                "name": {
-                    "type": ["string"]
-                }
+$scope.definitions = {
+    address:{
+        "type": "object",
+        "properties": {
+            "addressLine1": {
+                "type": "string"
+            },
+            "addressLine2": {
+                "type": "string"
+            },
+            "postCode": {
+                "type": "string"
+            },
+            "country": {
+                "type": "string"
             }
-        }
-    },
-    "1497245758395": {
-        "name": "Address",
-        "nameSpace": "address",
-        "data": {
-            "type": ["object"]
-        }
+        },
+        "required": [
+            "addressLine1",
+            "addressLine2",
+            "postCode",
+            "country"
+        ]
     }
 };
                 </pre>
-                Now when you select $ref as the type you will get a dropdown with <span class="code">#/definitions/user</span> and <span class="code">#/definitions/address</span>
+                Now when you select $ref as the type you will get a dropdown with <span class="code">#/definitions/address</span> 
             </p>
             <h4>Service</h4>
             This library also exposes a service <span class="code">JsonSchema</span> which you can inject into your controller and use.

@@ -3,28 +3,48 @@
 angular.module('schema-builder', ['ui.bootstrap', 'json-schema']);
 
 angular.module('schema-builder')
-.controller('schemaCtrler', schemaCtrler);
+    .controller('schemaCtrler', schemaCtrler);
 
 schemaCtrler.$inject = ['$scope', 'JsonSchema'];
 function schemaCtrler($scope, JsonSchema) {
-    $scope.refModels = {
-        "1496757761729": {
-            "name": "User",
-            "nameSpace": "user",
-            "data": {
-                "type": ["object"],
-                "properties": {
-                    "name": {
-                        "type": ["string"]
-                    }
+    $scope.definitions = {
+        address:{
+            "type": "object",
+            "properties": {
+                "addressLine1": {
+                    "type": "string"
+                },
+                "addressLine2": {
+                    "type": "string"
+                },
+                "postCode": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "addressLine1",
+                "addressLine2",
+                "postCode",
+                "country"
+            ]
+        },
+        service1:{
+            "type": "object",
+            "properties": {
+                "service1Fields": {
+                    "type": "string"
                 }
             }
         },
-        "1497245758395": {
-            "name": "Address",
-            "nameSpace": "address",
-            "data": {
-                "type": ["object"]
+        service2:{
+            "type": "object",
+            "properties": {
+                "service2Fields": {
+                    "type": "string"
+                }
             }
         }
     };
@@ -34,20 +54,33 @@ function schemaCtrler($scope, JsonSchema) {
         "properties": {
             "name": {
                 "type": "string",
-                "minLength": 3,
-                "maxLength": 255
+                "description": "user name"
             },
             "age": {
-                "type": "integer",
-                "minimum": 18
+                "type": "integer"
+            },
+            "addresses": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/address"
+                }
+            },
+            "services": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/service1"
+                    },
+                    {
+                        "$ref": "#/definitions/service2"
+                    }
+                ]
             }
         },
         "required": [
-            "name",
-            "age"
+            "name"
         ]
     }
-    
+
     $scope.data = JsonSchema.schema2obj(schema);
     $scope.data.root$$ = true;
 }
